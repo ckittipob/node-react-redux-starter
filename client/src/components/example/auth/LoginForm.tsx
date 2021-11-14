@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form as FinalForm, Field } from "react-final-form";
 import { connect } from "react-redux";
 import { login } from "../../../app/actions/auth";

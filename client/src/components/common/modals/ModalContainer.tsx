@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { openModal, closeModal } from "../../../app/actions/modal";
-import  Modal  from "react-modal";
+import { closeModal } from "../../../app/actions/modal";
 import Popup from "reactjs-popup";
 
 interface IProps {

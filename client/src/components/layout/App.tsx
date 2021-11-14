@@ -16,9 +16,9 @@ import ModalContainer from '../common/modals/ModalContainer';
 export const history = createBrowserHistory();
 
 interface IProps {
-  setAppLoaded(): any
-  getUser(): any
-  isAppLoadedStore: any
+  setAppLoaded(): Promise<void>
+  getUser(): Promise<void>
+  isAppLoadedStore: boolean
 }
 
 const App: React.FC<IProps> = ({

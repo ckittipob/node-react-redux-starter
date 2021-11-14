@@ -8,7 +8,7 @@ const initialState = {
 
 
 const commonReducer = (state = initialState, action:any) => {
-    const {type, payload} = action;
+    const {type} = action;
     switch(type) {
         case SET_APPLOADED:
             return {

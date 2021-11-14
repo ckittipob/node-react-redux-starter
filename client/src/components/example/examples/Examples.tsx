@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect } from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getExamples, delExample } from "../../../app/actions/example";
@@ -6,16 +7,16 @@ import { openModal } from "../../../app/actions/modal";
 import { IExample } from "../../../app/models/example";
 
 import LoadingPage from "../../layout/LoadingPage";
-import {history} from '../../layout/App';
+import { history } from "../../layout/App";
 import Confirmation from "../../common/modals/Confirmation";
 
 interface IProps {
-  getExamples(): any;
-  delExample(id: string): any;
-  openModal(content: any): any;
+  getExamples(): Promise<void>;
+  delExample(id: string): Promise<void>;
+  openModal(content: any): void;
   example: {
     examples: IExample[];
-    loadingExamples: boolean;
+    loading: boolean;
   };
 }
 
@@ -24,26 +25,26 @@ const Examples: React.FC<IProps> = ({
   openModal,
   getExamples,
   delExample,
-  example: { examples, loadingExamples },
+  example: { examples, loading },
 }) => {
   useEffect(() => {
     getExamples();
-    console.log("yo");
   }, [getExamples]);
 
-  const delHandler = (e:any, id: string) => {
+  const delHandler = (e: any, id: string) => {
     e.stopPropagation();
-    console.log("delete");
-    openModal(      <Confirmation
-      header={`DELETE`}
-      content={<p>{`Do yo want to delete this item ?`}</p>}
-      action={() => delExample(id).then(() => getExamples())}
-      loading={loadingExamples}
-      disable={loadingExamples}
-    />);
+    openModal(
+      <Confirmation
+        header={`DELETE`}
+        content={<p>{`Do yo want to delete this item ?`}</p>}
+        action={() => delExample(id).then(() => getExamples())}
+        loading={loading}
+        disable={loading}
+      />
+    );
   };
 
-  if (loadingExamples) return <LoadingPage></LoadingPage>;
+  if (loading) return <LoadingPage></LoadingPage>;
 
   return (
     <Fragment>
@@ -64,15 +65,19 @@ const Examples: React.FC<IProps> = ({
                 </thead>
                 <tbody>
                   {examples.map((example: IExample) => (
-                    <tr key={example._id}
-                    onClick={() => history.push(`/edit-example/${example._id}`)}
+                    <tr
+                      key={example._id}
+                      onClick={() =>
+                        history.push(`/edit-example/${example._id}`)
+                      }
                     >
-                      <td>
-                          {example.name}
-                      </td>
+                      <td>{example.name}</td>
                       <td>{example.integer}</td>
                       <td>
-                        <a className="del-btn" onClick={(e) => delHandler(e, example._id)}>
+                        <a
+                          className="del-btn"
+                          onClick={(e) => delHandler(e, example._id)}
+                        >
                           <i className="fas fa-trash-alt"></i>
                         </a>
                       </td>
@@ -94,4 +99,6 @@ const mapStateToProps = (state: any) => ({
   example: state.example,
 });
 
-export default connect(mapStateToProps, { getExamples, delExample, openModal })(Examples);
+export default connect(mapStateToProps, { getExamples, delExample, openModal })(
+  Examples
+);

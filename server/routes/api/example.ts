@@ -11,7 +11,6 @@ import Detail from "../../application/Example/Detail";
 import Create from "../../application/Example/Create";
 import Edit from "../../application/Example/Edit";
 import Delete from "../../application/Example/Delete";
-import Map from "../../application/Example/Map";
 
 
 
@@ -26,10 +25,6 @@ const router = express.Router();
 router.get("/protected", auth, List)
 
 
-// @route   Get api/example/mapping
-// @desc    Retrieve data with mapping profile lib
-// @access  Public
-router.get("/mapping", Map)
 
 
 // @route   Get api/example/

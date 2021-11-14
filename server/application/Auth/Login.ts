@@ -7,8 +7,6 @@ import { validationResult } from "express-validator";
 //Import Models
 import User from "../../models/User";
 
-const jwtSecret: string = process.env.JWT_SECRET!;
-
 
 const Login = async (req: Request, res: Response) => {
     
@@ -49,7 +47,7 @@ const Login = async (req: Request, res: Response) => {
         }
         jwt.sign(
             payload, 
-            jwtSecret,
+            process.env.JWT_SECRET!,
             { expiresIn: 360000 },
             (err, token) => {
                 if(err) throw err;

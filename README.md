@@ -19,3 +19,18 @@ username: test@test.com
 password: 123456
 
 
+#### Test Backend
+```sh
+cd server
+npm install
+npm run test
+```
+
+#### Test Frontend
+```sh
+cd client
+npm install
+npm run test
+```
+
+

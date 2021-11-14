@@ -15,9 +15,7 @@ const Navbar: React.FC<IProps> = ({ logout, isAuthenticatedStore }) => {
   };
 
   const [currentPage, setCurrentPage] = useState(window.location.pathname);
-  const [authState, setAuthState] = useState(
-    window.localStorage.getItem("token")
-  );
+
 
   history.listen((location) => {
     setCurrentPage(location.pathname);
@@ -41,7 +39,7 @@ const Navbar: React.FC<IProps> = ({ logout, isAuthenticatedStore }) => {
             <li>
               <Link
                 to="/examples"
-                className={currentPage === "/examples" ? "current" : ""}
+                className={currentPage.includes('example') ? "current" : ""}
               >
                 EXAMPLE
               </Link>

@@ -15,7 +15,9 @@ export const login = (user: IUserFormValues) => async (dispatch:any) => {
 
         history.push('/')
     } catch (err: any) {
-        throw err.response.data;
+        dispatch({
+            type:AUTH_FAIL
+        })
     }
 }
 

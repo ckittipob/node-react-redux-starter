@@ -1,12 +1,10 @@
 import {
     GET_EXAMPLES,
     GET_EXAMPLE,
-    GET_EXAMPLES_PROTECTED,
     CREATE_EXAMPLE,
     EDIT_EXAMPLE,
     DEL_EXAMPLE,
     EXAMPLES_LOADED,
-    EXAMPLE_LOADED,
     EXAMPLE_SUBMITTED,
     EXAMPLE_ERROR
 } from '../actions/types';
@@ -15,12 +13,8 @@ import {
 const initialState = {
     examples: [],
     example: {},
-    examplesProtected: [],
     loading: true,
-    loadingExamples: true,
-    loadingExample: true,
-    submittingExample: false,
-    appLoaded: false,
+    submitting: false,
     token: window.localStorage.getItem('jwt'),
     error: {}
 }
@@ -32,30 +26,24 @@ const exampleReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 examples: payload,
-                loadingExamples: false
-            };
-        case GET_EXAMPLES_PROTECTED:
-            return {
-                ...state,
-                examplesProtected: payload,
-                loadingExamples: false
+                loading: false
             };
         case GET_EXAMPLE:
             return {
                 ...state,
                 example: payload,
-                loadingExample: false
+                loading: false
             };
         case CREATE_EXAMPLE:
         case EDIT_EXAMPLE:
             return {
                 ...state,
-                submittingExample: false
+                submitting: false
             }
         case DEL_EXAMPLE:
             return {
                 ...state,
-                loadingExamples: true
+                loading: true
             }
         case EXAMPLE_ERROR:
             return {
@@ -66,17 +54,12 @@ const exampleReducer = (state = initialState, action: any) => {
         case EXAMPLES_LOADED:
             return {
                 ...state,
-                loadingExamples: true
-            }
-        case EXAMPLE_LOADED:
-            return {
-                ...state,
-                loadingExample: true
+                loading: true
             }
         case EXAMPLE_SUBMITTED:
             return {
                 ...state,
-                submittingExample: true
+                submitting: true
             }
         default:
             return state;
@@ -85,3 +68,4 @@ const exampleReducer = (state = initialState, action: any) => {
 }
 
 export default exampleReducer
+export {initialState}

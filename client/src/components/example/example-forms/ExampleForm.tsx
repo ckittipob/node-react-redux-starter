@@ -38,8 +38,8 @@ interface IProps {
   editExample(example: IExampleFormValues): any;
   exampleStore: {
     example: IExample;
-    loadingExample: boolean;
-    submittingExample: boolean;
+    loading: boolean;
+    submitting: boolean;
   };
 }
 
@@ -48,17 +48,17 @@ const ExampleForm: React.FC<IProps> = ({
   getExample,
   createExample,
   editExample,
-  exampleStore: { example, loadingExample, submittingExample },
+  exampleStore: { example, loading, submitting },
 }) => {
   const [exampleState, setExampleState] = useState(new ExampleFormValues());
-  const [loading, setLoading] = useState(false); // Loading Form (not implemented yet !!)
+  const [loadingForm, setLoadingForm] = useState(false); // Loading Form (not implemented yet !!)
 
   useEffect(() => {
     if (match.params.id) {
-      setLoading(true);
+      setLoadingForm(true);
       getExample(match.params.id)
         .then((e: any) => setExampleState(e))
-        .finally(() => setLoading(false));
+        .finally(() => setLoadingForm(false));
     }
   }, [getExample, createExample, editExample, match.params.id]);
 
@@ -78,7 +78,7 @@ const ExampleForm: React.FC<IProps> = ({
     }
   };
 
-  if (loading) return <LoadingPage></LoadingPage>;
+  if (loadingForm) return <LoadingPage></LoadingPage>;
   else {
     return (
       <div className="app-container">
@@ -97,7 +97,7 @@ const ExampleForm: React.FC<IProps> = ({
             dirtySinceLastSubmit,
           }) => (
             <form onSubmit={handleSubmit}>
-              {loadingExample && <p>Loading</p>}
+              {loading && <p>Loading</p>}
               <Field name="name">
                 {({ input, meta }) => (
                   <TextInput

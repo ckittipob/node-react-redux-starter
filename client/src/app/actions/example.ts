@@ -1,4 +1,3 @@
-import { formatDiagnostic } from "typescript";
 import agent from "../api/agent";
 import { IExampleFormValues } from "../models/example";
 import {
@@ -116,4 +115,4 @@ export const delExample = (id: string) => async (dispatch: any) => {
 };
 
 
-//Login - Set Token
+

@@ -1,6 +1,5 @@
 import React from "react";
 import { RouteProps, Route, Redirect, RouteComponentProps } from "react-router-dom";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 
